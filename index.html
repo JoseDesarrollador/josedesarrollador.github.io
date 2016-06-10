@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Backgroud Cavas</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			
+			background-color: #FAFAFA;
+		}
+	</style>
+</head>
+<body>
+
+<canvas id="LienzoBG"></canvas>
+
+<script type="text/javascript">
+	
+	var mousePos = {
+		x : 0,
+		y : 0,
+		CoberX : 0,
+		CoberY : 0
+	};
+	onmousemove = function(e){
+		// console.log("mouse location:", e.clientX, e.clientY);
+		mousePos.x = e.clientX;
+		mousePos.y = e.clientY;
+		mousePos.CoberX = e.clientX - 150;
+		mousePos.CoberY = e.clientY -150;
+	};
+
+	var miLienzo = document.getElementById('LienzoBG');	
+	var anchoLienzo = miLienzo.width  = window.innerWidth;
+	var altolienzo  = miLienzo.height = window.innerHeight;
+	var contexto = miLienzo.getContext("2d");
+	var color = "red";
+
+
+var arreglos = {
+	gray : [],
+	orange : []
+};
+
+
+	function clear() {
+	  contexto.clearRect(0, 0, anchoLienzo, altolienzo);
+	  return true;
+	}
+ 	jQuery.fx.timer( clear );
+
+    function circulo (x, y, index, nameArray) {
+ 		this.x = x;
+ 		this.y = y;
+ 		this.radio = 8;
+ 		this.xO =  x;
+ 		this.yO =  y;
+ 		this.index = index;
+ 		this.arr = nameArray;
+ 	}
+
+ 	circulo.prototype.draw = function() { 		
+        contexto.beginPath();
+        contexto.arc(this.x, this.y, this.radio, 0, 2 * Math.PI, false);
+        contexto.lineWidth = 4;
+	     if(arreglos[this.arr][this.index+1])
+	     {
+	     	contexto.moveTo(arreglos[this.arr][this.index].x + this.radio, arreglos[this.arr][this.index].y);
+			contexto.lineTo(arreglos[this.arr][this.index+1].x -this.radio, arreglos[this.arr][this.index+1].y);         	
+	     }
+        contexto.strokeStyle = this.arr;
+        contexto.stroke();
+    };
+
+    circulo.prototype.mover = function() {
+	  
+	  var anim = jQuery.Animation( this, {
+	    x:  nuevaPosicionX(this),
+	    y: nuevaPosicionY(this)
+	   //     x: Math.random() * anchoLienzo,
+    // y: Math.random() * altolienzo
+	  }, { 
+	    duration: Math.random()*1000+2000
+	  });
+	  
+	  
+	  anim.progress( this.draw ).done( this.mover );
+	};
+
+	function nuevaPosicionX(circulo){
+		var pos = 0;
+		if(circulo.x > mousePos.CoberX && circulo.x < mousePos.CoberX+300
+			&& circulo.y > mousePos.CoberY && circulo.y < mousePos.CoberY+300
+			){
+			pos = mousePos.x;
+			//console.log("hola mundo x")
+		}
+		else
+			pos = Math.floor(Math.random() * 50) + circulo.xO
+		return pos;
+	}
+
+	function nuevaPosicionY(circulo){
+		var pos = 0;
+		if(circulo.y > mousePos.CoberY && circulo.y < mousePos.CoberY+300
+			&&circulo.x > mousePos.CoberX && circulo.x < mousePos.CoberX+300
+			){
+			pos = mousePos.y;
+			//console.log("hola mundo y")
+		}
+		else
+			pos = Math.floor(Math.random() * 400) + circulo.yO
+		return pos;
+	}
+
+
+
+for (var i = 0; i < 15; i++) {
+		color = "gray";
+		var pos = -150;
+
+		if(i > 0)
+			pos = i * 150;
+		var cir = new circulo(pos,250, i, color);
+        arreglos[color].push(cir);
+        cir.mover();	
+}
+
+
+for (var i = 0; i < 15; i++) {
+		color = "orange";
+		var pos = -150;
+
+		if(i > 0)
+			pos = i * 150;
+		var cir = new circulo(pos,300, i, color);
+        arreglos[color].push(cir);
+        cir.mover();	
+}
+
+// arreglos.green = [];
+// for (var i = 0; i < 15; i++) {
+// 		color = "green";
+// 		var pos = -150;
+
+// 		if(i > 0)
+// 			pos = i * 200;
+// 		var cir = new circulo(pos,300, i, color);
+//         arreglos[color].push(cir);
+//         cir.mover();	
+// }
+
+
+// arreglos.red = [];
+// for (var i = 0; i < 15; i++) {
+// 		color = "red";
+// 		var pos = -150;
+
+// 		if(i > 0)
+// 			pos = i * 200;
+// 		var cir = new circulo(pos,300, i, color);
+//         arreglos[color].push(cir);
+//         cir.mover();	
+// }
+
+// arreglos.blue = [];
+// for (var i = 0; i < 15; i++) {
+// 		color = "blue";
+// 		var pos = -150;
+
+// 		if(i > 0)
+// 			pos = i * 200;
+// 		var cir = new circulo(pos,300, i, color);
+//         arreglos[color].push(cir);
+//         cir.mover();	
+// }
+
+
+
+</script>
+</body>
+</html>
+
