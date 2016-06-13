@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>Jose Guadalupe Castro - Example page</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 	<style type="text/css">
-		body{
+	  body{
 			margin: 0;
 			padding: 0;
 		}
@@ -12,11 +12,39 @@
 			
 			background-color: #FAFAFA;
 		}
+		canvas{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				z-index: 1;
+			}	
+			.Contenedor{
+				position: absolute;
+				width: 100%; height: auto;
+				z-index: 2;
+				position: absolute;
+			}
+			.titulo{
+				text-align: center;
+				font-size: 140px;
+				color: orange;
+				font-family: "Segoe UI", verdana;
+				margin-top: 350px;
+				text-shadow: 5px 0 0 #fff, -5px 0 0 #fff, 0 5px 0 #fff, 0 -5px 0 #fff, 4px 4px #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff;
+			}
+
+			.gris{
+				color: gray;
+			}
+
 	</style>
 </head>
 <body>
 
 <canvas id="LienzoBG"></canvas>
+<div class="Contenedor">
+	<h1 class="titulo">@<span class="gris">J</span>ose<span class="gris">D</span>esarrollador</h1>
+</div>
 
 <script type="text/javascript">
 	
@@ -119,12 +147,12 @@ var arreglos = {
 
 
 
-for (var i = 0; i < 15; i++) {
+for (var i = 0; i < 22; i++) {
 		color = "gray";
 		var pos = -150;
 
 		if(i > 0)
-			pos = i * 150;
+			pos = i * 100;
 		var cir = new circulo(pos,250, i, color);
         arreglos[color].push(cir);
         cir.mover();	
