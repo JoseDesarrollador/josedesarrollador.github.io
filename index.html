@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Jose Guadalupe Castro - Example page</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<title>Jose Castro - CV page</title>
+		<meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	  	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.0.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
+  		  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+
 	<style type="text/css">
 	  body{
 			margin: 0;
@@ -10,26 +16,37 @@
 		}
 		canvas{
 			
-			background-color: #FAFAFA;
+			
+
 		}
 		canvas{
 				position: absolute;
 				top: 0px;
 				left: 0px;
+				/*width: 5000px;
+				height: 100%;*/
 				z-index: 1;
 			}	
-			.Contenedor{
+			.ContenedorBase{
+				background-color: #FAFAFA;
+				background-color: rgba(250,250,250,.8);
 				position: absolute;
-				width: 100%; height: auto;
 				z-index: 2;
-				position: absolute;
+				overflow: scroll;
+				overflow-x: hidden;
+				height: 100%;
+
+			}
+			.transparente{
+				background-color: rgba(250,250,250,.1);
+
 			}
 			.titulo{
 				text-align: center;
 				font-size: 140px;
 				color: orange;
 				font-family: "Segoe UI", verdana;
-				margin-top: 350px;
+				margin-top: 280px;
 				text-shadow: 5px 0 0 #fff, -5px 0 0 #fff, 0 5px 0 #fff, 0 -5px 0 #fff, 4px 4px #fff, -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff;
 			}
 
@@ -42,8 +59,51 @@
 <body>
 
 <canvas id="LienzoBG"></canvas>
-<div class="Contenedor">
-	<h1 class="titulo">@<span class="gris">J</span>ose<span class="gris">D</span>esarrollador</h1>
+<div class=" ContenedorBase transparente">
+	<div class="col-sm-12">
+		<h1 class="titulo">@<span class="gris">J</span>ose<span class="gris">D</span>esarrollador</h1>
+	</div>
+	<div id="about" class="container-fluid">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>Acerca de mi</h2>
+				<h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4> 
+				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				
+				<button class="btn btn-default btn-lg">Get in Touch</button>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-signal logo"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 slideanim">
+				<span class="glyphicon glyphicon-globe logo"></span>
+			</div>
+			<div class="col-sm-8">
+				<h2>Mis skils</h2>		
+				<h4><strong>MISSION:</strong> Our mission Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h4>
+				<p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>	
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -208,6 +268,20 @@ for (var i = 0; i < 15; i++) {
 // }
 
 
+$(".ContenedorBase").scroll(function() {
+  $(".slideanim").each(function(){
+   
+
+    var winTop = $(".ContenedorBase").scrollTop();
+    console.log(winTop);
+    if ( winTop > 100) {
+    	$(".ContenedorBase").removeClass("transparente");
+    }
+    else{
+      $(".ContenedorBase").addClass("transparente");
+    }
+  });
+});
 
 </script>
 </body>
